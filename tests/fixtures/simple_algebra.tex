@@ -1,0 +1,15 @@
+% Simple algebraic derivation fixture
+% Used to test that the parser and decomposer handle basic algebra correctly.
+
+\begin{proof}
+  We show that $(a + b)^2 = a^2 + 2ab + b^2$.
+
+  \begin{align*}
+    (a + b)^2 &= (a + b)(a + b) \\
+              &= a(a + b) + b(a + b) \\
+              &= a^2 + ab + ba + b^2 \\
+              &= a^2 + 2ab + b^2,
+  \end{align*}
+
+  where the last step uses the commutativity of multiplication in $\mathbb{R}$.
+\end{proof}

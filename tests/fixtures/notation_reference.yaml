@@ -1,0 +1,76 @@
+# notation_reference.yaml
+# Sample notation registry for the test suite.
+
+\mu:
+  type: measure
+  space: \mathcal{P}(\mathcal{X})
+  assumptions:
+    - probability
+    - Borel
+  first_defined_at: "Section 2.1"
+  description: "Source marginal measure on X"
+
+\nu:
+  type: measure
+  space: \mathcal{P}(\mathcal{Y})
+  assumptions:
+    - probability
+    - Borel
+  first_defined_at: "Section 2.1"
+  description: "Target marginal measure on Y"
+
+\pi:
+  type: measure
+  space: \mathcal{P}(\mathcal{X} \times \mathcal{Y})
+  assumptions:
+    - coupling
+    - pi has marginals mu and nu
+  first_defined_at: "Definition 2.3"
+  description: "Transport plan (coupling of mu and nu)"
+
+\varepsilon:
+  type: scalar
+  space: \mathbb{R}_{>0}
+  assumptions:
+    - positive
+  first_defined_at: "Section 1"
+  description: "Regularisation strength"
+
+\alpha:
+  type: scalar
+  space: \mathbb{R}
+  assumptions: []
+  first_defined_at: "Section 3"
+  description: "Dual variable (f-potential)"
+
+\beta:
+  type: scalar
+  space: \mathbb{R}
+  assumptions: []
+  first_defined_at: "Section 3"
+  description: "Dual variable (g-potential)"
+
+c:
+  type: function
+  space: \mathcal{X} \times \mathcal{Y} \to \mathbb{R}_{\geq 0}
+  assumptions:
+    - lower semicontinuous
+    - bounded below
+  first_defined_at: "Section 1"
+  description: "Ground cost function"
+
+f:
+  type: function
+  space: \mathcal{X} \to \mathbb{R}
+  assumptions:
+    - measurable
+  first_defined_at: "Theorem 2.5"
+  description: "Kantorovich potential (primal variable)"
+
+g:
+  type: function
+  space: \mathcal{Y} \to \mathbb{R}
+  assumptions:
+    - measurable
+  first_defined_at: "Theorem 2.5"
+  description: "Kantorovich potential (primal variable)"

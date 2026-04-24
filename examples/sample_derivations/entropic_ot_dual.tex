@@ -1,0 +1,36 @@
+\section*{Derivation: Entropic OT Dual}
+
+Let $\mu, \nu$ be probability measures on a Polish space $\mathcal{X}$,
+and let $c : \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ be a cost function.
+The entropic optimal transport problem is
+\[
+    \mathrm{OT}_\varepsilon(\mu, \nu)
+    = \inf_{\pi \in \Pi(\mu,\nu)}
+      \int c(x,y)\, d\pi(x,y)
+      + \varepsilon\, \mathrm{KL}(\pi \,\|\, \mu \otimes \nu).
+\]
+
+Introducing Lagrange multipliers $f, g$ for the marginal constraints,
+we can write
+\[
+    \mathrm{OT}_\varepsilon(\mu,\nu)
+    = \sup_{f,g}\; \int f\, d\mu + \int g\, d\nu
+      - \varepsilon \int \left( e^{(f(x)+g(y)-c(x,y))/\varepsilon} - 1 \right)
+        d\mu(x)\, d\nu(y).
+\]
+
+Differentiating under the integral with respect to $f$ and setting the
+derivative to zero, we get
+\[
+    \int e^{(f(x)+g(y)-c(x,y))/\varepsilon}\, d\nu(y) = 1
+    \quad \text{for all } x,
+\]
+which gives the Sinkhorn fixed-point equation. Clearly, by symmetry the
+same holds for $g$, so both potentials are determined up to a constant
+and the iteration converges.
+
+By Fubini, we can swap the integrals in the dual whenever needed,
+and the change of variable $u = f/\varepsilon$ simplifies the
+expression further. It follows that the optimal coupling has the form
+$\pi^*(x,y) = e^{(f^*(x)+g^*(y)-c(x,y))/\varepsilon} d\mu(x)d\nu(y)$.
+\end{document}

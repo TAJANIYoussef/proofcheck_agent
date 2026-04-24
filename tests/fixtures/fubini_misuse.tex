@@ -1,0 +1,34 @@
+% Fubini misuse fixture
+% Contains multiple hand-wavy moves for integration testing.
+% The agent should flag: unjustified Fubini, vague "clearly", unjustified limit-integral swap.
+
+\section{Convergence of Double Integrals}
+
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space and let
+$(X, \mathcal{B}(X), \mu)$ be a $\sigma$-finite measure space.
+Let $f_n : \Omega \times X \to \mathbb{R}$ be a sequence of functions.
+
+\begin{theorem}
+  \label{thm:fubini_limit}
+  Suppose $f_n \to f$ pointwise. Then
+  \[
+    \lim_{n \to \infty} \int_X \int_\Omega f_n(\omega, x) \, d\mathbb{P}(\omega) \, d\mu(x)
+    = \int_X \int_\Omega f(\omega, x) \, d\mathbb{P}(\omega) \, d\mu(x).
+  \]
+\end{theorem}
+
+\begin{proof}
+  By Fubini, we can write the double integral as an iterated integral.
+  It follows that
+  \[
+    \lim_{n \to \infty} \int_\Omega \int_X f_n \, d\mu \, d\mathbb{P}
+    = \int_\Omega \int_X f \, d\mu \, d\mathbb{P}.
+  \]
+
+  The interchange of limit and integral is justified since clearly $f_n$
+  converges pointwise. We conclude that $\int_X f \, d\mu < \infty$,
+  and it is easy to see that the dominated convergence theorem applies.
+
+  Standard arguments show that the double integral is well-defined,
+  and obviously the equality holds in $L^1(\mu \otimes \mathbb{P})$.
+\end{proof}

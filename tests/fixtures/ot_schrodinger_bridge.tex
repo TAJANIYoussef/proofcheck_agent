@@ -1,0 +1,73 @@
+% Optimal Transport / Schrödinger Bridge fixture
+% Mimics a derivation relevant to Mixed-Type Stochastic Entropic OT.
+% Contains: valid steps, a weak step (unjustified regularity), and a vague step.
+
+\section{Entropic Optimal Transport and the Schrödinger Bridge}
+
+Let $(\mathcal{X}, \mathcal{B}(\mathcal{X}))$ and $(\mathcal{Y}, \mathcal{B}(\mathcal{Y}))$
+be Polish spaces, $\mu \in \mathcal{P}(\mathcal{X})$, $\nu \in \mathcal{P}(\mathcal{Y})$,
+and $\varepsilon > 0$.
+
+\begin{definition}
+  \label{def:sinkhorn_div}
+  The \emph{Sinkhorn divergence} between $\mu$ and $\nu$ at regularisation
+  strength $\varepsilon$ is
+  \[
+    S_\varepsilon(\mu, \nu)
+    \coloneqq \mathrm{OT}_\varepsilon(\mu, \nu)
+      - \tfrac{1}{2}\mathrm{OT}_\varepsilon(\mu, \mu)
+      - \tfrac{1}{2}\mathrm{OT}_\varepsilon(\nu, \nu),
+  \]
+  where $\mathrm{OT}_\varepsilon(\mu, \nu) \coloneqq
+  \min_{\pi \in \Pi(\mu,\nu)} \mathbb{E}_\pi[c(X,Y)] + \varepsilon \operatorname{KL}(\pi \mid \mu \otimes \nu)$.
+\end{definition}
+
+\begin{theorem}
+  \label{thm:dual_sinkhorn}
+  Under the above notation, the dual formulation of $\mathrm{OT}_\varepsilon(\mu, \nu)$ is
+  \[
+    \mathrm{OT}_\varepsilon(\mu, \nu)
+    = \sup_{f, g} \left\{
+      \int_\mathcal{X} f \, d\mu + \int_\mathcal{Y} g \, d\nu
+      - \varepsilon \int_{\mathcal{X} \times \mathcal{Y}}
+        e^{\frac{f(x) + g(y) - c(x,y)}{\varepsilon}} \, d(\mu \otimes \nu)(x,y)
+      + \varepsilon
+    \right\}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  We apply the Fenchel--Rockafellar duality theorem to the primal problem.
+  Let $F(\pi) = \varepsilon \operatorname{KL}(\pi \mid \mu \otimes \nu)$ and
+  $G(\pi) = \mathbb{E}_\pi[c]$ restricted to $\Pi(\mu, \nu)$.
+
+  Since $F$ is convex and lower semicontinuous in the weak topology on
+  $\mathcal{P}(\mathcal{X} \times \mathcal{Y})$, and $G$ is bounded below
+  (as $c$ is assumed lower semicontinuous and bounded below by our standing assumptions),
+  the primal problem is finite and attained.
+
+  By standard Fenchel--Rockafellar duality (see Villani, 2009, Theorem 5.10), strong duality holds
+  and we obtain
+  \begin{align*}
+    \mathrm{OT}_\varepsilon(\mu, \nu)
+    &= \sup_{(f, g) \in C_b(\mathcal{X}) \times C_b(\mathcal{Y})}
+       \inf_{\pi \in \mathcal{P}(\mathcal{X} \times \mathcal{Y})}
+       \left\{
+         \mathbb{E}_\pi[c - f \oplus g] + \varepsilon \operatorname{KL}(\pi \mid \mu \otimes \nu)
+         + \int f \, d\mu + \int g \, d\nu
+       \right\}.
+  \end{align*}
+
+  The inner infimum over $\pi$ is clearly minimised by the Gibbs kernel
+  $d\pi^* = e^{(f \oplus g - c)/\varepsilon} \, d(\mu \otimes \nu)$,
+  which is integrable by compactness of the support.
+
+  Substituting and simplifying (using $\int e^{(f+g-c)/\varepsilon} \, d(\mu\otimes\nu) = Z_{f,g}$),
+  we obtain the stated dual formula.
+\end{proof}
+
+\begin{remark}
+  The condition that $c$ is bounded below can be relaxed; it follows that the result
+  extends to lower semicontinuous cost functions on Polish spaces by a standard
+  approximation argument.
+\end{remark}

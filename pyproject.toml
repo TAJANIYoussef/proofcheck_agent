@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deriv-verifier"
+version = "0.1.0"
+description = "Step-by-step LaTeX derivation verifier using local LLMs via Ollama"
+authors = [{ name = "Youssef Tajani", email = "yousseftajani.pro@gmail.com" }]
+requires-python = ">=3.11"
+license = { text = "MIT" }
+readme = "README.md"
+dependencies = [
+    "pydantic>=2.8",
+    "pydantic-ai>=0.0.14",
+    "pydantic-settings>=2.4",
+    "openai>=1.50",
+    "ollama>=0.3.3",
+    "pylatexenc>=2.10",
+    "sympy>=1.13",
+    "typer>=0.12",
+    "rich>=13.7",
+    "pyyaml>=6.0.2",
+    "reportlab>=4.2",
+    "markdown>=3.7",
+]
+
+[project.scripts]
+deriv-verifier = "deriv_verifier.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "TCH"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v --tb=short"

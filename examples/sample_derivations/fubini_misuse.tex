@@ -1,0 +1,17 @@
+% Sample derivation for end-to-end demo.
+% Demonstrates: unjustified Fubini, vague "clearly", missing DCT hypothesis.
+
+\begin{proof}
+Let $f_n \to f$ pointwise and suppose $f_n \geq 0$.
+By Fubini, we swap the order of integration:
+\[
+  \int_\Omega \int_X f_n \, d\mu \, d\mathbb{P}
+  = \int_X \int_\Omega f_n \, d\mathbb{P} \, d\mu.
+\]
+It clearly follows that
+\[
+  \lim_{n \to \infty} \int_X f_n \, d\mu = \int_X f \, d\mu,
+\]
+since obviously $f_n$ converges to $f$ and the dominated convergence theorem applies.
+We conclude $\int_X f \, d\mu < \infty$.
+\end{proof}
